@@ -1,0 +1,49 @@
+/* ==================================================================
+   PANELS — settings, and the route bar shown while following an order
+   ================================================================== */
+
+/* ---- settings ---- */
+.settings{position:fixed;z-index:12;right:10px;top:calc(56px + var(--pad-t));width:min(300px,calc(100vw - 32px));
+  background:rgba(8,12,22,.94);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:12px;padding:14px;
+  opacity:0;transform:translateY(-6px);pointer-events:none;transition:.18s}
+.settings.on{opacity:1;transform:none;pointer-events:auto}
+.settings h4{margin:0 0 8px;font:600 9px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.settings .seg{display:flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.settings .seg button{flex:1 1 0;background:#0C1324;border:0;border-right:1px solid var(--line);padding:9px 6px;
+  font:600 11.5px/1 var(--disp);color:#AFC0DE}
+.settings .seg button:last-child{border-right:0}
+.settings .seg button.on{background:rgba(143,160,255,.16);color:#fff;box-shadow:inset 0 -2px 0 #8FA0FF}
+.settings p{margin:8px 0 12px;font:400 11.8px/1.5 var(--sans);color:var(--dim)}
+.settings .tog{display:flex;align-items:center;gap:8px;margin:0 0 12px;font:500 12px/1.3 var(--sans);color:#C9D6EE;cursor:pointer}
+.settings .tog input{accent-color:#8FA0FF;width:15px;height:15px}
+.settings kbd{margin-left:auto;font:600 9.5px/1 var(--mono);color:var(--faint);border:1px solid var(--line);border-radius:5px;padding:3px 5px}
+
+/* ---- the route bar: one order, every hop, where it is now ---- */
+.route{position:fixed;z-index:7;left:50%;bottom:calc(18px + var(--pad-b));transform:translate(-50%,12px);
+  width:min(880px,calc(100vw - 32px));background:rgba(8,12,22,.92);backdrop-filter:blur(12px);
+  border:1px solid var(--line);border-top:2px solid var(--acc,#FFD166);border-radius:12px;padding:10px 12px 12px;
+  opacity:0;pointer-events:none;transition:.25s}
+.route.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.route-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:9px}
+.route-hd b{font:600 11.5px/1.2 var(--mono);color:#fff;white-space:nowrap}
+.route-hd span{flex:1 1 auto;min-width:0;font:400 12.5px/1.4 var(--sans);color:#C9D6EE}
+.route-hd .x{width:26px;height:26px;font-size:12px}
+.route ol{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.route ol::-webkit-scrollbar{display:none}
+.route li{flex:1 0 auto;min-width:64px;position:relative;padding:14px 4px 0;text-align:center;
+  font:500 10px/1.25 var(--sans);color:var(--faint);white-space:nowrap}
+.route li:before{content:'';position:absolute;left:0;right:0;top:4px;height:3px;border-radius:2px;background:#1C2942}
+.route li:after{content:'';position:absolute;left:50%;top:0;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;
+  background:#0B1222;border:2px solid #2A3A5C;box-sizing:border-box}
+.route li small{display:block;font:500 9px/1.2 var(--mono);color:var(--faint);margin-top:2px}
+.route li.done{color:#AFC0DE}
+.route li.done:before{background:var(--acc,#FFD166);opacity:.55}
+.route li.done:after{background:var(--acc,#FFD166);border-color:var(--acc,#FFD166)}
+.route li.now{color:#fff}
+.route li.now:before{background:var(--acc,#FFD166)}
+.route li.now:after{background:#fff;border-color:var(--acc,#FFD166);box-shadow:0 0 0 4px rgba(255,209,102,.18)}
+.route li.bad{color:#FF9A8E}
+.route li.bad:after{background:#FF7A6B;border-color:#FF7A6B}
+body.following .labbar,body.following .hint{opacity:0!important;pointer-events:none!important}
+@media(max-width:700px){.route{bottom:calc(140px + var(--pad-b))}}
+@media (prefers-reduced-motion: reduce){.settings,.route{transition:none}}
